@@ -16,6 +16,9 @@
   margin-top: 2em;
   padding: 0 0.8em 0.1em 0.8em;
 }
+#rootpopup{
+  width: 500px;
+}
 
 .brand {
   font-family: 'Roboto Mono', monospace;
