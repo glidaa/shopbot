@@ -1,10 +1,13 @@
 .popup {
   text-align: center;
-  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
 }
 
 .popup-greet {
-  color: #80FFAB;
+  color: #80ffab;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,11 +15,11 @@
   font-size: 2em;
   font-style: italic;
   letter-spacing: 0.1em;
-  font-family: "Noto Sans", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   margin-top: 2em;
   padding: 0 0.8em 0.1em 0.8em;
 }
-#rootpopup{
+#rootpopup {
   width: 500px;
 }
 
@@ -56,3 +59,192 @@
   font-weight: bold;
 }
 
+/* form css */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-container {
+  min-height: 200px;
+}
+
+.sqr-input-discount {
+  flex-direction: column;
+}
+
+#discount {
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #acacac;
+  width: 100px;
+}
+
+.submit-button {
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  background-color: #e0e0e0;
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  text-transform: uppercase;
+  border: transparent;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#percent {
+  margin-left: 5px;
+}
+
+.container {
+  margin: 10px auto;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.form-part {
+  margin: 20px 0;
+}
+
+.form-part h2 {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  margin-bottom: 15px;
+}
+
+.text-input,
+.radio-button,
+.check-boxes {
+  margin-bottom: 13px;
+}
+
+.text-input label,
+.radio-button label,
+#percent {
+  display: block;
+  margin-bottom: 3px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.check-boxes span {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.note {
+  margin-top: 10px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+/* The container */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* loader */
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

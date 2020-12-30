@@ -1,0 +1,163 @@
+type Links {
+  id: ID!
+  userId: String!
+  link: String!
+  discount: String!
+  sendAllSales: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelLinksConnection {
+  items: [Links]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelLinksFilterInput {
+  id: ModelIDInput
+  userId: ModelStringInput
+  link: ModelStringInput
+  discount: ModelStringInput
+  sendAllSales: ModelBooleanInput
+  and: [ModelLinksFilterInput]
+  or: [ModelLinksFilterInput]
+  not: ModelLinksFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getLinks(id: ID!): Links
+  listLinkss(filter: ModelLinksFilterInput, limit: Int, nextToken: String): ModelLinksConnection
+}
+
+input CreateLinksInput {
+  id: ID
+  userId: String!
+  link: String!
+  discount: String!
+  sendAllSales: Boolean!
+}
+
+input UpdateLinksInput {
+  id: ID!
+  userId: String
+  link: String
+  discount: String
+  sendAllSales: Boolean
+}
+
+input DeleteLinksInput {
+  id: ID
+}
+
+type Mutation {
+  createLinks(input: CreateLinksInput!, condition: ModelLinksConditionInput): Links
+  updateLinks(input: UpdateLinksInput!, condition: ModelLinksConditionInput): Links
+  deleteLinks(input: DeleteLinksInput!, condition: ModelLinksConditionInput): Links
+}
+
+input ModelLinksConditionInput {
+  userId: ModelStringInput
+  link: ModelStringInput
+  discount: ModelStringInput
+  sendAllSales: ModelBooleanInput
+  and: [ModelLinksConditionInput]
+  or: [ModelLinksConditionInput]
+  not: ModelLinksConditionInput
+}
+
+type Subscription {
+  onCreateLinks: Links @aws_subscribe(mutations: ["createLinks"])
+  onUpdateLinks: Links @aws_subscribe(mutations: ["updateLinks"])
+  onDeleteLinks: Links @aws_subscribe(mutations: ["deleteLinks"])
+}

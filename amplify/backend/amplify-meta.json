@@ -18,11 +18,6 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
-        "logicalId": "authreactextensionboiler601232e9"
-      },
-      "lastPushTimeStamp": "2020-12-29T07:06:38.597Z",
       "output": {
         "AppClientSecret": "o1jno8703a7smprqdq8cnekmkcttg7r8lmiaobb8n487s02p0ro",
         "UserPoolId": "us-east-2_eNCH7oKvb",
@@ -32,7 +27,36 @@
         "IdentityPoolName": "reactextensionboiler601232e9_identitypool_601232e9__dev",
         "UserPoolName": "reactextensionboiler601232e9_userpool_601232e9"
       },
-      "lastPushDirHash": "5cx6lZEOH5vaBX8G37owzB1Akp4="
+      "lastPushTimeStamp": "2020-12-30T10:41:20.768Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
+        "logicalId": "authreactextensionboiler601232e9"
+      }
+    }
+  },
+  "api": {
+    "amplifyGraphqlApi": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authreactextensionboiler601232e9"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "tr6ci4xrpbcrhf6t22qldzthvq",
+        "GraphQLAPIEndpointOutput": "https://kp7674b4tzbwjdh5inx3d4j4gi.appsync-api.us-east-2.amazonaws.com/graphql"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiamplifyGraphqlApi"
+      },
+      "lastPushTimeStamp": "2020-12-30T10:41:23.458Z",
+      "lastPushDirHash": "q+3dPHO6/hHZFtY7bH3MZwDUYRM="
     }
   }
 }

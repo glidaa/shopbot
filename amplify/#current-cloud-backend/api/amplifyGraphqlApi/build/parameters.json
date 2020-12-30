@@ -1,0 +1,14 @@
+{
+    "CreateAPIKey": 0,
+    "AppSyncApiName": "amplifyGraphqlApi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authreactextensionboiler601232e9",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-reactextensionboiler-dev-122702-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/fafb6ece3d1406288ed8802162f31411401c8379"
+}
