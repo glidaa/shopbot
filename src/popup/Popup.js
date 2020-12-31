@@ -1,7 +1,7 @@
 import React from 'react';
 import Auth from '@aws-amplify/auth';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createLinks, deleteLinks } from '../graphql/mutations';
+import { createLinks, updateLinks } from '../graphql/mutations';
 import { listLinkss } from '../graphql/queries';
 import './Popup.css';
 
@@ -13,7 +13,7 @@ function getCurrentLink(cb) {
   chrome.tabs.query(
     { active: true, windowId: chrome.windows.WINDOW_ID_CURRENT },
     function(tabs) {
-      cb(tabs[0].url);
+      cb(tabs[0].url, tabs[0].title);
     }
   );
   /* eslint-enable */
@@ -30,24 +30,47 @@ function getCurrentUserId(cb) {
   });
 }
 
+const ShowAlertList = ({ links, deleteLink }) => {
+  return (
+    <div className="alert-list-container">
+      <h2>SAVED ALERTS</h2>
+      {links.map((link) => (
+        <div
+          key={link.id}
+          className={link.active ? 'alert-item' : 'alert-item fade-link'}
+        >
+          <a href={link.link}>{link.title || 'N/A'}</a>
+          <button
+            className="submit-button alert-cta"
+            type="button"
+            onClick={() => {
+              link.active ? deleteLink(link.id) : console.log('activate link');
+            }}
+          >
+            {link.active ? 'Delete Alert' : 'Activate Alert'}
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Popup = () => {
   const [loading, setLoading] = React.useState(true);
   const [saveLink, setSaveLink] = React.useState(true);
   const [link, setLink] = React.useState({});
+  const [allLinks, setAllLinks] = React.useState([]);
 
   const discountRef = React.useRef();
   const sendAllSalesRef = React.useRef();
 
   React.useEffect(() => {
     // fetch data for current page
-    getCurrentUserId((user) => {
-      getCurrentLink((link) => {
+    getCurrentLink((link) => {
+      getCurrentUserId((user) => {
         const filter = {
           userId: {
             eq: user,
-          },
-          link: {
-            eq: link,
           },
         };
 
@@ -61,9 +84,15 @@ const Popup = () => {
             const {
               listLinkss: { items },
             } = data;
+            console.log(items);
+            const isAlertForCurrentLink = items.find(
+              (item) => item.link === link && item.item === true
+            );
+            console.log(isAlertForCurrentLink);
 
-            setSaveLink(items.length > 0 ? false : true);
-            setLink(items[0]);
+            setSaveLink(!isAlertForCurrentLink);
+            setLink(isAlertForCurrentLink || {});
+            setAllLinks(items);
             setLoading(false);
           })
           .catch((error) => {
@@ -83,11 +112,13 @@ const Popup = () => {
 
     // perform mutation and update newly created alert in state
     getCurrentUserId((user) => {
-      getCurrentLink((link) => {
+      getCurrentLink((link, title) => {
         const linkData = {
           link,
+          title,
           discount,
           sendAllSales,
+          active: true,
         };
 
         API.graphql(
@@ -109,13 +140,14 @@ const Popup = () => {
   };
 
   // delete alert mutation
-  const deleteLinkFn = () => {
+  const deleteLinkFn = (linkId) => {
     setLoading(true);
 
     API.graphql(
-      graphqlOperation(deleteLinks, {
+      graphqlOperation(updateLinks, {
         input: {
-          id: link.id,
+          id: linkId,
+          active: false,
         },
       })
     )
@@ -132,13 +164,13 @@ const Popup = () => {
 
   // show loader until ui performs operation
   if (loading) {
-    return (
-      <div className="popup">
-        <div className="loader-container flex-center">
-          <div className="loader"></div>
-        </div>
-      </div>
-    );
+    // return (
+    //   <div className="popup">
+    //     <div className="loader-container flex-center">
+    //       <div className="loader"></div>
+    //     </div>
+    //   </div>
+    // );
   }
 
   return (
@@ -199,7 +231,7 @@ const Popup = () => {
               <button
                 className="submit-button"
                 type="button"
-                onClick={deleteLinkFn}
+                onClick={() => deleteLinkFn(link.id)}
               >
                 Delete Alert
               </button>
@@ -207,6 +239,7 @@ const Popup = () => {
           )}
         </div>
       </div>
+      <ShowAlertList deleteLink={deleteLinkFn} links={allLinks} />
     </div>
   );
 };

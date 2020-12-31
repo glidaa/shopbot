@@ -1,9 +1,11 @@
 type Links {
   id: ID!
+  title: String
   userId: String!
   link: String!
   discount: String!
   sendAllSales: Boolean!
+  active: Boolean
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -93,10 +95,12 @@ input ModelSizeInput {
 
 input ModelLinksFilterInput {
   id: ModelIDInput
+  title: ModelStringInput
   userId: ModelStringInput
   link: ModelStringInput
   discount: ModelStringInput
   sendAllSales: ModelBooleanInput
+  active: ModelBooleanInput
   and: [ModelLinksFilterInput]
   or: [ModelLinksFilterInput]
   not: ModelLinksFilterInput
@@ -122,18 +126,22 @@ type Query {
 
 input CreateLinksInput {
   id: ID
+  title: String
   userId: String!
   link: String!
   discount: String!
   sendAllSales: Boolean!
+  active: Boolean
 }
 
 input UpdateLinksInput {
   id: ID!
+  title: String
   userId: String
   link: String
   discount: String
   sendAllSales: Boolean
+  active: Boolean
 }
 
 input DeleteLinksInput {
@@ -147,10 +155,12 @@ type Mutation {
 }
 
 input ModelLinksConditionInput {
+  title: ModelStringInput
   userId: ModelStringInput
   link: ModelStringInput
   discount: ModelStringInput
   sendAllSales: ModelBooleanInput
+  active: ModelBooleanInput
   and: [ModelLinksConditionInput]
   or: [ModelLinksConditionInput]
   not: ModelLinksConditionInput

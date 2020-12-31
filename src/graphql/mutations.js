@@ -8,10 +8,12 @@ export const createLinks = /* GraphQL */ `
   ) {
     createLinks(input: $input, condition: $condition) {
       id
+      title
       userId
       link
       discount
       sendAllSales
+      active
       createdAt
       updatedAt
     }
@@ -24,10 +26,12 @@ export const updateLinks = /* GraphQL */ `
   ) {
     updateLinks(input: $input, condition: $condition) {
       id
+      title
       userId
       link
       discount
       sendAllSales
+      active
       createdAt
       updatedAt
     }
@@ -40,10 +44,12 @@ export const deleteLinks = /* GraphQL */ `
   ) {
     deleteLinks(input: $input, condition: $condition) {
       id
+      title
       userId
       link
       discount
       sendAllSales
+      active
       createdAt
       updatedAt
     }

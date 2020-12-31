@@ -27,7 +27,7 @@
         "IdentityPoolName": "reactextensionboiler601232e9_identitypool_601232e9__dev",
         "UserPoolName": "reactextensionboiler601232e9_userpool_601232e9"
       },
-      "lastPushTimeStamp": "2020-12-30T10:41:20.768Z",
+      "lastPushTimeStamp": "2020-12-31T05:34:48.408Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
         "logicalId": "authreactextensionboiler601232e9"
@@ -51,12 +51,12 @@
         "GraphQLAPIIdOutput": "tr6ci4xrpbcrhf6t22qldzthvq",
         "GraphQLAPIEndpointOutput": "https://kp7674b4tzbwjdh5inx3d4j4gi.appsync-api.us-east-2.amazonaws.com/graphql"
       },
+      "lastPushTimeStamp": "2020-12-31T05:34:51.147Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiamplifyGraphqlApi"
       },
-      "lastPushTimeStamp": "2020-12-30T10:41:23.458Z",
-      "lastPushDirHash": "q+3dPHO6/hHZFtY7bH3MZwDUYRM="
+      "lastPushDirHash": "Lhu+RYuimHRlb7galo8T87wOLlk="
     }
   }
 }

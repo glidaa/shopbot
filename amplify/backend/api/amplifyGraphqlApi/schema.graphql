@@ -1,7 +1,9 @@
 type Links @model {
   id: ID!
+  title: String
   userId: String!
   link: String!
   discount: String!
   sendAllSales: Boolean!
+  active: Boolean
 }
