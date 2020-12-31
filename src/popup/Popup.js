@@ -3,6 +3,7 @@ import Auth from '@aws-amplify/auth';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createLinks, updateLinks } from '../graphql/mutations';
 import { listLinkss } from '../graphql/queries';
+import ShowAlertList from './ShowAlertList';
 import './Popup.css';
 
 import { withAuthenticator } from 'aws-amplify-react';
@@ -30,31 +31,6 @@ function getCurrentUserId(cb) {
   });
 }
 
-const ShowAlertList = ({ links, deleteLink }) => {
-  return (
-    <div className="alert-list-container">
-      <h2>SAVED ALERTS</h2>
-      {links.map((link) => (
-        <div
-          key={link.id}
-          className={link.active ? 'alert-item' : 'alert-item fade-link'}
-        >
-          <a href={link.link}>{link.title || 'N/A'}</a>
-          <button
-            className="submit-button alert-cta"
-            type="button"
-            onClick={() => {
-              link.active ? deleteLink(link.id) : console.log('activate link');
-            }}
-          >
-            {link.active ? 'Delete Alert' : 'Activate Alert'}
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 const Popup = () => {
   const [loading, setLoading] = React.useState(true);
   const [saveLink, setSaveLink] = React.useState(true);
@@ -65,6 +41,10 @@ const Popup = () => {
   const sendAllSalesRef = React.useRef();
 
   React.useEffect(() => {
+    fetchLinks();
+  }, []);
+
+  const fetchLinks = () => {
     // fetch data for current page
     getCurrentLink((link) => {
       getCurrentUserId((user) => {
@@ -86,7 +66,7 @@ const Popup = () => {
             } = data;
             console.log(items);
             const isAlertForCurrentLink = items.find(
-              (item) => item.link === link && item.item === true
+              (item) => item.link === link && item.active === true
             );
             console.log(isAlertForCurrentLink);
 
@@ -101,7 +81,7 @@ const Popup = () => {
           });
       });
     });
-  }, []);
+  };
 
   // create alert for link
   const createLinkFn = () => {
@@ -130,6 +110,7 @@ const Popup = () => {
             setLoading(false);
             setSaveLink(false);
             setLink(data.createLinks);
+            fetchLinks();
           })
           .catch((error) => {
             setLoading(false);
@@ -140,21 +121,20 @@ const Popup = () => {
   };
 
   // delete alert mutation
-  const deleteLinkFn = (linkId) => {
+  const updateLinkFn = (linkId, active) => {
     setLoading(true);
 
     API.graphql(
       graphqlOperation(updateLinks, {
         input: {
           id: linkId,
-          active: false,
+          active,
         },
       })
     )
       .then(() => {
-        setSaveLink(true);
-        setLoading(false);
-        setLink({});
+        // update link status in link list
+        fetchLinks();
       })
       .catch((error) => {
         setLoading(false);
@@ -164,13 +144,13 @@ const Popup = () => {
 
   // show loader until ui performs operation
   if (loading) {
-    // return (
-    //   <div className="popup">
-    //     <div className="loader-container flex-center">
-    //       <div className="loader"></div>
-    //     </div>
-    //   </div>
-    // );
+    return (
+      <div className="popup">
+        <div className="loader-container flex-center">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -231,7 +211,7 @@ const Popup = () => {
               <button
                 className="submit-button"
                 type="button"
-                onClick={() => deleteLinkFn(link.id)}
+                onClick={() => updateLinkFn(link.id, false)}
               >
                 Delete Alert
               </button>
@@ -239,7 +219,7 @@ const Popup = () => {
           )}
         </div>
       </div>
-      <ShowAlertList deleteLink={deleteLinkFn} links={allLinks} />
+      <ShowAlertList updateLink={updateLinkFn} links={allLinks} />
     </div>
   );
 };

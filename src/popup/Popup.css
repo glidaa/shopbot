@@ -69,7 +69,7 @@
 }
 
 .loader-container {
-  min-height: 200px;
+  min-height: 400px;
 }
 
 .alert-list-container {
@@ -78,7 +78,7 @@
   flex-direction: column;
   border-top: 1px solid #acacac;
   width: 100%;
-  min-height: 200px;
+  height: 230px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
