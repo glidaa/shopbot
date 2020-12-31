@@ -9,7 +9,9 @@ const ShowAlertList = ({ links, updateLink }) => {
           key={link.id}
           className={link.active ? 'alert-item' : 'alert-item fade-link'}
         >
-          <a href={link.link}>{link.title || 'N/A'}</a>
+          <a href={link.link} target="_blank">
+            {link.title || 'N/A'}
+          </a>
           <button
             className="submit-button alert-cta"
             type="button"
