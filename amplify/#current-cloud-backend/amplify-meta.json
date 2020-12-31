@@ -1,15 +1,15 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-reactextensionboiler-dev-122702-authRole",
-      "UnauthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-dev-122702-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-dev-122702-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-reactextensionboiler-dev-122702-deployment",
-      "UnauthRoleName": "amplify-reactextensionboiler-dev-122702-unauthRole",
-      "StackName": "amplify-reactextensionboiler-dev-122702",
-      "StackId": "arn:aws:cloudformation:us-east-2:476202956165:stack/amplify-reactextensionboiler-dev-122702/11ac6620-49a3-11eb-9888-06ea1ea9ca40",
-      "AmplifyAppId": "d3urp01s4hragy"
+      "AuthRoleName": "amplify-reactextensionboiler-shopbot-84444-authRole",
+      "UnauthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-shopbot-84444-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-shopbot-84444-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-reactextensionboiler-shopbot-84444-deployment",
+      "UnauthRoleName": "amplify-reactextensionboiler-shopbot-84444-unauthRole",
+      "StackName": "amplify-reactextensionboiler-shopbot-84444",
+      "StackId": "arn:aws:cloudformation:us-east-1:476202956165:stack/amplify-reactextensionboiler-shopbot-84444/3f5dc4b0-4ae8-11eb-ab2c-12afb4d5f445",
+      "AmplifyAppId": "d1570ehmba36q4"
     }
   },
   "auth": {
@@ -18,20 +18,21 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-shopbot-84444-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
+        "logicalId": "authreactextensionboiler601232e9"
+      },
+      "lastPushTimeStamp": "2020-12-30T22:19:14.743Z",
       "output": {
-        "AppClientSecret": "o1jno8703a7smprqdq8cnekmkcttg7r8lmiaobb8n487s02p0ro",
-        "UserPoolId": "us-east-2_eNCH7oKvb",
-        "AppClientIDWeb": "2mfpc11n1unmedg0580od41bfh",
-        "AppClientID": "2e1q9ackka43geqvmn7se8fuek",
-        "IdentityPoolId": "us-east-2:1807d75f-cd54-40cf-8732-e509c45486a3",
-        "IdentityPoolName": "reactextensionboiler601232e9_identitypool_601232e9__dev",
+        "AppClientSecret": "1sqjrdfejns71fsjdul8ch3e75avl0nppdoov12di21no62d0a92",
+        "UserPoolId": "us-east-1_79wZeXoH1",
+        "AppClientIDWeb": "3h4o9s78lcctugrgv1fk8cqtjn",
+        "AppClientID": "2nbur245ro7dnojbfom8f0nlv5",
+        "IdentityPoolId": "us-east-1:649b4edf-1fa4-430f-b344-7154104305cc",
+        "IdentityPoolName": "reactextensionboiler601232e9_identitypool_601232e9__shopbot",
         "UserPoolName": "reactextensionboiler601232e9_userpool_601232e9"
       },
-      "lastPushTimeStamp": "2020-12-30T10:41:20.768Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
-        "logicalId": "authreactextensionboiler601232e9"
-      }
+      "lastPushDirHash": "5cx6lZEOH5vaBX8G37owzB1Akp4="
     }
   },
   "api": {
@@ -48,15 +49,15 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "tr6ci4xrpbcrhf6t22qldzthvq",
-        "GraphQLAPIEndpointOutput": "https://kp7674b4tzbwjdh5inx3d4j4gi.appsync-api.us-east-2.amazonaws.com/graphql"
+        "GraphQLAPIIdOutput": "e6lxqag6lffwzjjda52spizzby",
+        "GraphQLAPIEndpointOutput": "https://qakdgkunkbcavcc53paimytmzm.appsync-api.us-east-1.amazonaws.com/graphql"
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-shopbot-84444-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiamplifyGraphqlApi"
       },
-      "lastPushTimeStamp": "2020-12-30T10:41:23.458Z",
-      "lastPushDirHash": "q+3dPHO6/hHZFtY7bH3MZwDUYRM="
+      "lastPushTimeStamp": "2020-12-30T22:19:14.743Z",
+      "lastPushDirHash": "qvfhMYpYaBf1GML7BFTipvCp/3w="
     }
   }
 }

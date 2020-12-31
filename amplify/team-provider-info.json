@@ -16,5 +16,23 @@
         "reactextensionboiler601232e9": {}
       }
     }
+  },
+  "shopbot": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reactextensionboiler-shopbot-84444-authRole",
+      "UnauthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-shopbot-84444-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::476202956165:role/amplify-reactextensionboiler-shopbot-84444-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-reactextensionboiler-shopbot-84444-deployment",
+      "UnauthRoleName": "amplify-reactextensionboiler-shopbot-84444-unauthRole",
+      "StackName": "amplify-reactextensionboiler-shopbot-84444",
+      "StackId": "arn:aws:cloudformation:us-east-1:476202956165:stack/amplify-reactextensionboiler-shopbot-84444/3f5dc4b0-4ae8-11eb-ab2c-12afb4d5f445",
+      "AmplifyAppId": "d1570ehmba36q4"
+    },
+    "categories": {
+      "auth": {
+        "reactextensionboiler601232e9": {}
+      }
+    }
   }
 }

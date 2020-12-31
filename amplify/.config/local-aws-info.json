@@ -3,5 +3,10 @@
     "configLevel": "project",
     "useProfile": true,
     "profileName": "dev-bot-console"
+  },
+  "shopbot": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "shopbot01"
   }
 }

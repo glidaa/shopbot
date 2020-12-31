@@ -71,7 +71,7 @@
     "authreactextensionboiler601232e9": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-shopbot-84444-deployment/amplify-cfn-templates/auth/reactextensionboiler601232e9-cloudformation-template.yml",
         "Parameters": {
           "identityPoolName": "reactextensionboiler601232e9_identitypool_601232e9",
           "allowUnauthenticatedIdentities": false,
@@ -115,14 +115,14 @@
           "serviceName": "Cognito",
           "usernameCaseSensitive": false,
           "dependsOn": "",
-          "env": "dev"
+          "env": "shopbot"
         }
       }
     },
     "apiamplifyGraphqlApi": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-dev-122702-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-reactextensionboiler-shopbot-84444-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
           "CreateAPIKey": 0,
           "AppSyncApiName": "amplifyGraphqlApi",
@@ -134,9 +134,9 @@
               "Outputs.UserPoolId"
             ]
           },
-          "S3DeploymentBucket": "amplify-reactextensionboiler-dev-122702-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/fafb6ece3d1406288ed8802162f31411401c8379",
-          "env": "dev"
+          "S3DeploymentBucket": "amplify-reactextensionboiler-shopbot-84444-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/1e3413072cb790e937c6bff4fe72ab4a0fe220b5",
+          "env": "shopbot"
         }
       }
     },

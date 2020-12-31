@@ -9,6 +9,6 @@
             "Outputs.UserPoolId"
         ]
     },
-    "S3DeploymentBucket": "amplify-reactextensionboiler-dev-122702-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/fafb6ece3d1406288ed8802162f31411401c8379"
+    "S3DeploymentBucket": "amplify-reactextensionboiler-shopbot-84444-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/1e3413072cb790e937c6bff4fe72ab4a0fe220b5"
 }
