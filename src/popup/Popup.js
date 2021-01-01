@@ -224,4 +224,48 @@ const Popup = () => {
   );
 };
 
-export default withAuthenticator(Popup, true);
+const signUpConfig = {
+  hiddenDefaults: ['username'],
+  signInFields: [
+    {
+      label: 'Email',
+      key: 'username'
+    }
+  ],
+  signUpFields: [
+    {
+      label: 'Email',
+      key: 'username', // :exclamation::exclamation::exclamation:
+      required: false,
+      displayOrder: 2,
+      type: 'string',
+      custom: false,
+    },
+    {
+      label: 'Password',
+      key: 'password',
+      required: true,
+      displayOrder: 4,
+      type: 'password',
+      custom: false,
+    },
+    {
+      label: 'Repeat Email',
+      key: 'email',
+      required: true,
+      displayOrder: 3,
+      type: 'tel',
+      custom: false,
+    },
+    {
+      label: 'Phone Number (Not Required)',
+      key: 'phone_number',
+      required: false,
+      displayOrder: 5,
+      type: 'tel',
+      custom: false,
+    },
+  ],
+};
+  
+export default withAuthenticator(Popup, { signUpConfig });
