@@ -286,6 +286,4 @@ const MyTheme = {
   googleSignInButton: { backgroundColor: 'red', borderColor: 'red' },
 };
 
-export default withAuthenticator(Popup, false, [], null, MyTheme, {
-  signUpConfig,
-});
+export default withAuthenticator(Popup, false, [], null, MyTheme, signUpConfig);
