@@ -155,6 +155,14 @@ const Popup = () => {
 
   return (
     <div className="popup">
+      <button
+        className="submit-button"
+        onClick={() => {
+          Auth.signOut({ global: true }).then((data) => console.log(data));
+        }}
+      >
+        Logout
+      </button>
       <div className="container">
         <div className="form-part">
           {saveLink ? (
@@ -230,8 +238,8 @@ const signUpConfig = {
   signInFields: [
     {
       label: 'Email',
-      key: 'username'
-    }
+      key: 'username',
+    },
   ],
   signUpFields: [
     {
@@ -271,12 +279,13 @@ const signUpConfig = {
 
 const MyTheme = {
   button: {
-    'fontSize': '33px',
+    fontSize: '33px',
     backgroundColor: '#f0e7da',
-   
   },
-  signInButtonIcon: { 'display': 'none' },
-  googleSignInButton: { 'backgroundColor': 'red', 'borderColor': 'red' }
+  signInButtonIcon: { display: 'none' },
+  googleSignInButton: { backgroundColor: 'red', borderColor: 'red' },
 };
-  
-export default withAuthenticator(Popup, false, [], null, MyTheme,{ signUpConfig } );
+
+export default withAuthenticator(Popup, false, [], null, MyTheme, {
+  signUpConfig,
+});
