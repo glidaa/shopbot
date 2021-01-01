@@ -4,6 +4,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { createLinks, updateLinks } from '../graphql/mutations';
 import { listLinkss } from '../graphql/queries';
 import ShowAlertList from './ShowAlertList';
+import Logo from '../img/icon.png';
 import './Popup.css';
 
 import { withAuthenticator } from 'aws-amplify-react';
@@ -24,10 +25,10 @@ function getCurrentLink(cb) {
 function getCurrentUserId(cb) {
   Auth.currentAuthenticatedUser().then((user) => {
     const {
-      attributes: { sub },
+      attributes: { sub, email },
     } = user;
 
-    cb(sub);
+    cb({ id: sub, email });
   });
 }
 
@@ -36,6 +37,7 @@ const Popup = () => {
   const [saveLink, setSaveLink] = React.useState(true);
   const [link, setLink] = React.useState({});
   const [allLinks, setAllLinks] = React.useState([]);
+  const [user, setUser] = React.useState({});
 
   const discountRef = React.useRef();
   const sendAllSalesRef = React.useRef();
@@ -47,10 +49,10 @@ const Popup = () => {
   const fetchLinks = () => {
     // fetch data for current page
     getCurrentLink((link) => {
-      getCurrentUserId((user) => {
+      getCurrentUserId((userData) => {
         const filter = {
           userId: {
-            eq: user,
+            eq: userData.id,
           },
         };
 
@@ -68,12 +70,12 @@ const Popup = () => {
             const isAlertForCurrentLink = items.find(
               (item) => item.link === link && item.active === true
             );
-            console.log(isAlertForCurrentLink);
 
             setSaveLink(!isAlertForCurrentLink);
             setLink(isAlertForCurrentLink || {});
             setAllLinks(items);
             setLoading(false);
+            setUser(userData);
           })
           .catch((error) => {
             console.error(error);
@@ -91,8 +93,20 @@ const Popup = () => {
     setLoading(true);
 
     // perform mutation and update newly created alert in state
-    getCurrentUserId((user) => {
+    getCurrentUserId(({ id: user }) => {
       getCurrentLink((link, title) => {
+        // check if current link is already in links
+        const isAlreadyAlertPresent = allLinks.find((currentLink) => {
+          return currentLink.link === link;
+        });
+        console.log(isAlreadyAlertPresent);
+
+        if (isAlreadyAlertPresent) {
+          updateLinkFn(isAlreadyAlertPresent.id, true);
+
+          return;
+        }
+
         const linkData = {
           link,
           title,
@@ -153,16 +167,39 @@ const Popup = () => {
     );
   }
 
+  const filterAndSortLinks = (links) => {
+    const activeLinks = links.filter((link) => link.active);
+    const deactiveLinks = links.filter((link) => !link.active);
+
+    const sortedActiveLinks = activeLinks.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    const sortedDeActiveLinks = deactiveLinks.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    return sortedActiveLinks.concat(sortedDeActiveLinks);
+  };
+
   return (
     <div className="popup">
-      <button
-        className="submit-button"
-        onClick={() => {
-          Auth.signOut({ global: true }).then((data) => console.log(data));
-        }}
-      >
-        Logout
-      </button>
+      <div className="popup-header">
+        <div className="logo-container">
+          <img src={Logo} alt="logo" />
+          <button
+            className="submit-button"
+            onClick={() => {
+              Auth.signOut({ global: true }).then((data) => console.log(data));
+            }}
+          >
+            Logout
+          </button>
+        </div>
+        <p className="info-text-main">
+          With Creamy you can set email alerts to <b>{user.email}</b> when the
+          products you want go on sale.
+        </p>
+      </div>
       <div className="container">
         <div className="form-part">
           {saveLink ? (
@@ -227,14 +264,19 @@ const Popup = () => {
           )}
         </div>
       </div>
-      <ShowAlertList updateLink={updateLinkFn} links={allLinks} />
+      <ShowAlertList
+        updateLink={updateLinkFn}
+        links={filterAndSortLinks(allLinks)}
+        user={user}
+      />
     </div>
   );
 };
 
 const signUpConfig = {
   hiddenDefaults: ['username'],
-  header: 'Welcome to Creamer.',
+  header:
+    'Create a new account with Creamy to receive email alerts when the products you want go on sale.',
   signInFields: [
     {
       label: 'Email',
@@ -277,13 +319,6 @@ const signUpConfig = {
   ],
 };
 
-const MyTheme = {
-  button: {
-    fontSize: '33px',
-    backgroundColor: '#f0e7da',
-  },
-  signInButtonIcon: { display: 'none' },
-  googleSignInButton: { backgroundColor: 'red', borderColor: 'red' },
-};
+const MyTheme = {};
 
 export default withAuthenticator(Popup, false, [], null, MyTheme, signUpConfig);

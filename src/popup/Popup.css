@@ -101,6 +101,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 65%;
+  text-align: left;
 }
 
 .sqr-input-discount {
@@ -136,16 +137,36 @@
   margin-left: 5px;
 }
 
-.container {
-  margin: 10px auto;
-}
-
 .clearfix {
   clear: both;
 }
 
-.form-part {
-  margin: 20px 0;
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+}
+
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header img {
+  width: 50px;
+}
+
+.saved-alert-text {
+  margin-bottom: 0 !important;
+}
+
+.info-text-main {
+  font-size: 15px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .form-part h2,
