@@ -8,9 +8,9 @@ const ShowAlertList = ({ links, updateLink, user }) => {
   return (
     <div className="alert-list-container">
       <h2 className="saved-alert-text">SAVED ALERTS</h2>
-      <p className="info-text-main">
-        Creamy is watching this product for you and will email you at{' '}
-        {user.email} when your product goes on sale.
+      <p className="saved-text-main">
+                  We will email you at{' '}
+        {user.email}.
       </p>
       {links.map((link) => (
         <div

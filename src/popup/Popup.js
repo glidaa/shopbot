@@ -186,6 +186,10 @@ const Popup = () => {
       <div className="popup-header">
         <div className="logo-container">
           <img src={Logo} alt="logo" />
+          <p className="info-text-main">
+          With Creamy you can set email alerts to <b>{user.email}</b> when the
+          products you want go on sale.
+          </p>
           <button
             className="submit-button"
             onClick={() => {
@@ -195,10 +199,7 @@ const Popup = () => {
             Logout
           </button>
         </div>
-        <p className="info-text-main">
-          With Creamy you can set email alerts to <b>{user.email}</b> when the
-          products you want go on sale.
-        </p>
+        
       </div>
       <div className="container">
         <div className="form-part">
@@ -253,6 +254,10 @@ const Popup = () => {
             </React.Fragment>
           ) : (
             <div>
+              <p className="delete-text-main">
+              Creamy is watching this product for you and will email you at{' '}
+                {user.email} when your product goes on sale.
+              </p>
               <button
                 className="submit-button"
                 type="button"
@@ -260,6 +265,8 @@ const Popup = () => {
               >
                 Delete Alert
               </button>
+              <br></br>
+              <br></br>
             </div>
           )}
         </div>
@@ -319,6 +326,15 @@ const signUpConfig = {
   ],
 };
 
-const MyTheme = {};
+const MyTheme = {
+  button: {
+    'fontSize': '33px',
+    backgroundColor: '#f0e7da',
+    'color': 'darkgrey',
+    'font-weight': 'bolder',
+  },  
+  'headerText' : 'Test',
+};
+
 
 export default withAuthenticator(Popup, false, [], null, MyTheme, signUpConfig);
