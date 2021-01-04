@@ -187,7 +187,7 @@ const Popup = () => {
         <div className="logo-container">
           <img src={Logo} alt="logo" />
           <p className="info-text-main">
-          With Creamy you can set email alerts to <b>{user.email}</b> when the
+          With <b className='logo-text'>Creamy&trade;</b> you can set email alerts to <b>{user.email}</b> when the
           products you want go on sale.
           </p>
           <button

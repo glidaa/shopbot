@@ -168,6 +168,11 @@
   padding: 20px 20px 0 20px;
 }
 
+.logo-text {
+  color:black;
+  font-size: larger;
+}
+
 .logo-container {
   width: 100%;
   display: flex;
