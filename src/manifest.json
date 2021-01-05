@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "manifest_version": 2,
-  "name": "React Boilerplate Extension",
-  "description": "Modern React boilerplate for Firefox and Chrome extensions.",
+  "name": "Creamy",
+  "description": "Set sale alerts for products you choose.",
   "content_scripts": [
     {
       "matches": [
