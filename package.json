@@ -38,6 +38,7 @@
     "url": "https://github.com/kryptokinght/react-extension-boilerplate/issues"
   },
   "dependencies": {
+    "@aws-amplify/analytics": "^4.0.4",
     "@aws-amplify/ui-react": "^0.2.33",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
@@ -97,7 +98,7 @@
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "^0.23.1",

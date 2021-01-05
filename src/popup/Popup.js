@@ -1,17 +1,58 @@
-import React from 'react';
-import './Popup.css';
+import React from "react";
+import "./Popup.css";
 
-import {withAuthenticator} from 'aws-amplify-react';
+import {
+  AmplifyAuthenticator,
+  AmplifySignOut,
+  AmplifySignUp,
+  AmplifySignIn,
+} from "@aws-amplify/ui-react";
+import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
 const Popup = () => {
-  console.log('POPUP');
-  return (
-    <div className="popup">
-      {/* <p className="contrib-msg">We would love some of your help in making this boilerplate even better. <br /><a href="https://www.github.com/kryptokinght/react-extension-boilerplate" target="_blank">React Extension Boilerplate</a></p> */}
-      {/* <AmplifySignOut style={{width: '500px'}} /> */}
+  const [authState, setAuthState] = React.useState();
+  const [user, setUser] = React.useState();
+
+  React.useEffect(() => {
+    onAuthUIStateChange((nextAuthState, authData) => {
+      setAuthState(nextAuthState);
+      setUser(authData);
+    });
+  }, []);
+
+  const form = (
+    <div>
+      <AmplifyAuthenticator usernameAlias="email">
+        <AmplifySignUp
+          slot="sign-up"
+          usernameAlias="email"
+          formFields={[
+            {
+              type: "email",
+              label: "Email",
+              placeholder: "Email",
+              required: true,
+            },
+            {
+              type: "password",
+              label: "Password",
+              placeholder: "Password",
+              required: true,
+            },
+          ]}
+        />
+        <AmplifySignIn slot="sign-in" usernameAlias="email" />
+      </AmplifyAuthenticator>
     </div>
   );
+
+  return authState === AuthState.SignedIn && user ? (
+    <div className="App">
+      <h1 style={{ color: "white" }}> Welcome to auth app </h1>
+      <AmplifySignOut />
+    </div>
+  ) : (
+    form
+  );
 };
-
-
-export default withAuthenticator(Popup, true);
+export default Popup;

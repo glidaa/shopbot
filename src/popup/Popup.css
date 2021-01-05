@@ -3,8 +3,13 @@
   width: 800px;
 }
 
+:root {
+  --amplify-primary-color: #52fc8b;
+  --amplify-primary-shade: #8efab2;
+}
+
 .popup-greet {
-  color: #80FFAB;
+  color: #80ffab;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,12 +21,12 @@
   margin-top: 2em;
   padding: 0 0.8em 0.1em 0.8em;
 }
-#rootpopup{
+#rootpopup {
   width: 500px;
 }
 
 .brand {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   letter-spacing: 0em;
   font-style: normal;
   font-weight: 600;
@@ -29,7 +34,7 @@
 
 .stack-head {
   color: #ffffff;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   /* font-weight: 700; */
   font-size: 2em;
 }
@@ -45,7 +50,7 @@
 
 .contrib-msg {
   color: #ffffff;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   /* font-weight: 700; */
   font-size: 1.5em;
   margin: 2em 2em 3em 2em;
@@ -55,4 +60,3 @@
   color: #0055ff;
   font-weight: bold;
 }
-
