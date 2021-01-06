@@ -199,7 +199,7 @@ const Popup = () => {
   };
 
   // show loader until ui performs operation
-  if (!loading) {
+  if (loading) {
     return (
       <div className="popup">
         <div className="loader-container flex-center">
