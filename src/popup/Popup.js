@@ -1,13 +1,46 @@
-import React from 'react';
-import Auth from '@aws-amplify/auth';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import { createLinks, updateLinks } from '../graphql/mutations';
-import { listLinkss } from '../graphql/queries';
-import ShowAlertList from './ShowAlertList';
-import Logo from '../img/icon.png';
-import './Popup.css';
+import React from "react";
+import Auth from "@aws-amplify/auth";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import { createLinks, updateLinks } from "../graphql/mutations";
+import { listLinkss } from "../graphql/queries";
+import ShowAlertList from "./ShowAlertList";
+import Logo from "../img/icon.png";
+import "./Popup.css";
 
-import { withAuthenticator } from 'aws-amplify-react';
+import {
+  AmplifyAuthenticator,
+  AmplifySignOut,
+  AmplifySignUp,
+  AmplifySignIn,
+} from "@aws-amplify/ui-react";
+
+import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
+
+const form = (
+  <div>
+    <AmplifyAuthenticator usernameAlias="email">
+      <AmplifySignUp
+        slot="sign-up"
+        usernameAlias="email"
+        formFields={[
+          {
+            type: "email",
+            label: "Email",
+            placeholder: "Email",
+            required: true,
+          },
+          {
+            type: "password",
+            label: "Password",
+            placeholder: "Password",
+            required: true,
+          },
+        ]}
+      />
+      <AmplifySignIn slot="sign-in" usernameAlias="email" />
+    </AmplifyAuthenticator>
+  </div>
+);
 
 // get current active link
 function getCurrentLink(cb) {
@@ -41,6 +74,15 @@ const Popup = () => {
 
   const discountRef = React.useRef();
   const sendAllSalesRef = React.useRef();
+
+  const [authState, setAuthState] = React.useState();
+
+  React.useEffect(() => {
+    onAuthUIStateChange((nextAuthState, authData) => {
+      setAuthState(nextAuthState);
+      setUser(authData);
+    });
+  }, []);
 
   React.useEffect(() => {
     fetchLinks();
@@ -157,11 +199,11 @@ const Popup = () => {
   };
 
   // show loader until ui performs operation
-  if (loading) {
+  if (!loading) {
     return (
       <div className="popup">
         <div className="loader-container flex-center">
-          <div className="loader"></div>
+          <div className="loader" />
         </div>
       </div>
     );
@@ -181,106 +223,105 @@ const Popup = () => {
     return sortedActiveLinks.concat(sortedDeActiveLinks);
   };
 
-  return (
-    <div className="popup">
-      <div className="popup-header">
-        <div className="logo-container">
-          <img src={Logo} alt="logo" />
-          <p className="info-text-main">
-          With Creamy you can set email alerts to <b>{user.email}</b> when the
-          products you want go on sale.
-          </p>
-          <button
-            className="submit-button"
-            onClick={() => {
-              Auth.signOut({ global: true }).then((data) => console.log(data));
-            }}
-          >
-            Logout
-          </button>
-        </div>
-        
-      </div>
-      <div className="container">
-        <div className="form-part">
-          {saveLink ? (
-            <React.Fragment>
-              <h2>Set an email alert when the sale price is right for you.</h2>
-              <div className="form-inputs">
-                <div className="sqr-input">
-                  <div className="text-input margin-bottom-zero">
-                    <div className="sqr-input sqr-input-discount flex-center">
-                      <div className="text-input flex-center">
-                        <label htmlFor="phone">Discount</label>
-                        <input
-                          ref={discountRef}
-                          type="number"
-                          name="discount"
-                          id="discount"
-                          defaultValue="10"
-                        />
-                        <span id="percent">%</span>
-                      </div>
+  return authState === AuthState.SignedIn && user ? (
+    <div className="App">
+      <div className="popup">
+        <div className="popup-header">
+          <div className="logo-container">
+            <img src={Logo} alt="logo" />
+            <p className="info-text-main">
+              With Creamy you can set email alerts to <b>{user.email}</b> when
+              the products you want go on sale.
+            </p>
 
-                      <div className="check-boxes flex-center">
-                        <label className="checkbox-container flex-center">
-                          Alert all sales from this store
+            <AmplifySignOut />
+          </div>
+        </div>
+        <div className="container">
+          <div className="form-part">
+            {saveLink ? (
+              <React.Fragment>
+                <h2>
+                  Set an email alert when the sale price is right for you.
+                </h2>
+                <div className="form-inputs">
+                  <div className="sqr-input">
+                    <div className="text-input margin-bottom-zero">
+                      <div className="sqr-input sqr-input-discount flex-center">
+                        <div className="text-input flex-center">
+                          <label htmlFor="phone">Discount</label>
                           <input
-                            type="checkbox"
-                            ref={sendAllSalesRef}
-                            type="checkbox"
-                            name="alertAllSites"
-                            className="alert-all-sites-checkbox"
+                            ref={discountRef}
+                            type="number"
+                            name="discount"
+                            id="discount"
+                            defaultValue="10"
                           />
-                          <span className="checkmark"></span>
-                        </label>
+                          <span id="percent">%</span>
+                        </div>
+
+                        <div className="check-boxes flex-center">
+                          <label className="checkbox-container flex-center">
+                            Alert all sales from this store
+                            <input
+                              type="checkbox"
+                              ref={sendAllSalesRef}
+                              type="checkbox"
+                              name="alertAllSites"
+                              className="alert-all-sites-checkbox"
+                            />
+                            <span className="checkmark" />
+                          </label>
+                        </div>
+                        <button
+                          className="submit-button"
+                          type="button"
+                          onClick={createLinkFn}
+                        >
+                          Set Email Alert
+                        </button>
+                        <div className="note">
+                          <b>Note:</b> We will email you when your product goes
+                          on sale for this discount or more.
+                        </div>
+                        <div className="clearfix" />
                       </div>
-                      <button
-                        className="submit-button"
-                        type="button"
-                        onClick={createLinkFn}
-                      >
-                        Set Email Alert
-                      </button>
-                      <div className="note">
-                        <b>Note:</b> We will email you when your product goes on
-                        sale for this discount or more.
-                      </div>
-                      <div className="clearfix"></div>
                     </div>
                   </div>
                 </div>
+              </React.Fragment>
+            ) : (
+              <div>
+                <p className="delete-text-main">
+                  Creamy is watching this product for you and will email you at{" "}
+                  {user.email} when your product goes on sale.
+                </p>
+                <button
+                  className="submit-button"
+                  type="button"
+                  onClick={() => updateLinkFn(link.id, false)}
+                >
+                  Delete Alert
+                </button>
+                <br />
+                <br />
               </div>
-            </React.Fragment>
-          ) : (
-            <div>
-              <p className="delete-text-main">
-              Creamy is watching this product for you and will email you at{' '}
-                {user.email} when your product goes on sale.
-              </p>
-              <button
-                className="submit-button"
-                type="button"
-                onClick={() => updateLinkFn(link.id, false)}
-              >
-                Delete Alert
-              </button>
-              <br></br>
-              <br></br>
-            </div>
-          )}
+            )}
+          </div>
         </div>
+        <ShowAlertList
+          updateLink={updateLinkFn}
+          links={filterAndSortLinks(allLinks)}
+          user={user}
+        />
       </div>
-      <ShowAlertList
-        updateLink={updateLinkFn}
-        links={filterAndSortLinks(allLinks)}
-        user={user}
-      />
     </div>
+  ) : (
+    form
   );
 };
 
-const signUpConfig = {
+/*const signUpConfig = {
   hiddenDefaults: ['username'],
   header:
     'Create a new account with Creamy to receive email alerts when the products you want go on sale.',
@@ -324,17 +365,16 @@ const signUpConfig = {
       custom: false,
     },
   ],
-};
+};*/
 
 const MyTheme = {
   button: {
-    'fontSize': '33px',
-    backgroundColor: '#f0e7da',
-    'color': 'darkgrey',
-    'font-weight': 'bolder',
-  },  
-  'headerText' : 'Test',
+    fontSize: "33px",
+    backgroundColor: "#f0e7da",
+    color: "darkgrey",
+    "font-weight": "bolder",
+  },
+  headerText: "Test",
 };
 
-
-export default withAuthenticator(Popup, false, [], null, MyTheme, signUpConfig);
+export default Popup;
