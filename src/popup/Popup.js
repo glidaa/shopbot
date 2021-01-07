@@ -82,6 +82,7 @@ const Popup = () => {
       setAuthState(nextAuthState);
       setUser(authData);
     });
+    setLoading(false);
   }, []);
 
   React.useEffect(() => {
@@ -233,9 +234,8 @@ const Popup = () => {
               With Creamy you can set email alerts to <b>{user.email}</b> when
               the products you want go on sale.
             </p>
-
-            <AmplifySignOut />
           </div>
+          <AmplifySignOut />
         </div>
         <div className="container">
           <div className="form-part">
